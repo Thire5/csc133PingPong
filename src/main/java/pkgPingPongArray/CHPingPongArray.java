@@ -32,6 +32,27 @@ public class CHPingPongArray {
             }
         }
     }
+    public void reset() {
+        for (int row = 0; row < live[0].length; row++) {
+            for (int col = 0; col < live[0].length; col++) {
+                live[row][col] = rand.nextInt(defaultRandMin, defaultRandMax);
+            }
+        }
+    }
+    public void reset(int min, int max) {
+        for (int row = 0; row < live[0].length; row++) {
+            for (int col = 0; col < live[0].length; col++) {
+                live[row][col] = rand.nextInt(min, max);
+            }
+        }
+    }
+    public void printLive() {
+        for (int row = 0; row < live[0].length; row++) {
+            for (int col = 0; col < live[0].length; col++) {
+                System.out.print(live[row][col] + " ");
+            }
+        }
+    }
     public void setCellLive(int row, int col, int value) {
         live[row][col] = value;
     }
