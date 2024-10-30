@@ -11,13 +11,13 @@ public class CHdriver {
         CHPingPongArray myPingPong = new CHPingPongArray();
         myPingPong.createArray(rows, cols, min, max);
         myPingPong.printLive();
-        myPingPong.createArray(rows, cols);
+        myPingPong.reset();
         myPingPong.printLive();
         myPingPong.createNearestArray();
         myPingPong.swap();
         myPingPong.printLive();
         myPingPong.swap();
-        myPingPong.createNearestArray();
+        myPingPong.createNextNearestArray();
         myPingPong.swap();
         myPingPong.printLive();
     }

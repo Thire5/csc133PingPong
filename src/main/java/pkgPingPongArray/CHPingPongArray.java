@@ -14,9 +14,10 @@ public class CHPingPongArray {
         this.rows = rows;
         this.cols = cols;
         live = new int[rows][cols];
+        next = new int[rows][cols];
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                live[row][col] = rand.nextInt(defaultRandMin, defaultRandMax);
+                live[row][col] = rand.nextInt(defaultRandMin, defaultRandMax + 1);
             }
         }
     }
@@ -24,6 +25,7 @@ public class CHPingPongArray {
         this.rows = rows;
         this.cols = cols;
         live = new int[rows][cols];
+        next = new int[rows][cols];
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 live[row][col] = value;
@@ -34,6 +36,7 @@ public class CHPingPongArray {
         this.rows = rows;
         this.cols = cols;
         live = new int[rows][cols];
+        next = new int[rows][cols];
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 live[row][col] = rand.nextInt(min, max);
@@ -43,7 +46,7 @@ public class CHPingPongArray {
     public void reset() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                live[row][col] = rand.nextInt(defaultRandMin, defaultRandMax);
+                live[row][col] = rand.nextInt(defaultRandMin, defaultRandMax + 1);
             }
         }
     }
@@ -59,7 +62,9 @@ public class CHPingPongArray {
             for (int col = 0; col < live[0].length; col++) {
                 System.out.print(live[row][col] + " ");
             }
+            System.out.println();
         }
+        System.out.println();
     }
     public void setCellLive(int row, int col, int value) {
         live[row][col] = value;
@@ -91,10 +96,14 @@ public class CHPingPongArray {
     }
     public int countNearest(int row, int col) {
         int count = 0;
-        count += live[row - 1][col];
-        count += live[row][col - 1];
-        count += live[row + 1][col];
-        count += live[row][col + 1];
+        int nextRow = (row + 1) % rows;
+        int nextCol = (col + 1) % cols;
+        int prevRow = (row - 1 + rows) % rows;
+        int prevCol = (col - 1 + cols) % cols;
+        count += live[prevRow][col];
+        count += live[row][prevCol];
+        count += live[nextRow][col];
+        count += live[row][nextCol];
         return count;
     }
     public int countNextNearest(int row, int col) {
