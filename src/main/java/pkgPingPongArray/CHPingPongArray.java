@@ -39,7 +39,7 @@ public class CHPingPongArray {
         next = new int[rows][cols];
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                live[row][col] = rand.nextInt(min, max);
+                live[row][col] = rand.nextInt(min, max + 1);
             }
         }
     }
@@ -53,7 +53,7 @@ public class CHPingPongArray {
     public void reset(int min, int max) {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                live[row][col] = rand.nextInt(min, max);
+                live[row][col] = rand.nextInt(min, max + 1);
             }
         }
     }
@@ -69,7 +69,7 @@ public class CHPingPongArray {
     public void setCellLive(int row, int col, int value) {
         live[row][col] = value;
     }
-    public void setCellNext(int row, int col, int value) {
+    private void setCellNext(int row, int col, int value) {
         next[row][col] = value;
     }
     public int getCellLive(int row, int col) {
@@ -107,11 +107,11 @@ public class CHPingPongArray {
         return count;
     }
     public int countNextNearest(int row, int col) {
+        int count = 0;
         int nextRow = (row + 1) % rows;
         int nextCol = (col + 1) % cols;
         int prevRow = (row - 1 + rows) % rows;
         int prevCol = (col - 1 + cols) % cols;
-        int count = 0;
         count += countNearest(row, col);
         count += live[prevRow][prevCol];
         count += live[prevRow][nextCol];
